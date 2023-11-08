@@ -1,0 +1,132 @@
+﻿@model DevIO.App.ViewModels.ClienteViewModel
+@using DevIO.App.Extensions
+@using DevIO.Business.Models
+<style>
+    label, h1 {
+        color: #1a5ec2;
+        font-weight: bold;
+    }
+</style>
+@{
+    ViewData["Title"] = "Editar Cliente - " + Model.Nome;
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+<hr />
+<div class="container">
+    <form asp-action="Edit" id="cliente-form">
+        <input type="hidden" asp-for="Id" />
+
+
+        <div class="form-group row">
+            <div class="col-md-5">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Mail" class="control-label"></label>
+                <input asp-for="Mail" class="form-control" />
+                <span asp-validation-for="Mail" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+
+        </div>
+        <br />
+        <div class="form-group row">
+
+            <div class="col-md-6">
+                <label asp-for="TipoCliente" class="control-label"></label><br />
+                <input type="radio" value="1" asp-for="TipoCliente" checked /> Pessoa Física<br />
+                <input type="radio" value="2" asp-for="TipoCliente" /> Pessoa Jurídica
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Documento" class="control-label"></label>
+                <input asp-for="Documento" class="form-control" />
+                <span asp-validation-for="Documento" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="InscricaoEstadual" class="control-label"></label>
+                    <input asp-for="InscricaoEstadual" class="form-control" />
+                    <span asp-validation-for="InscricaoEstadual" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-group form-check">
+                        <label>Inscricão Estadual:</label>
+                        <br />
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Isento" /> @Html.DisplayNameFor(model => model.Isento)
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="Genero" class="control-label"></label>
+                <select asp-for="Genero" asp-items="Html.GetEnumSelectList<Genero>()" class="form-control">
+                    <option value="">Selecione o gênero</option>
+                </select>
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="DataNascimento" class="control-label"></label>
+                <input asp-for="DataNascimento" class="form-control" />
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="col-md-3">
+                <div class="form-group form-check">
+
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="col-md-6">
+                <label asp-for="Senha" class="control-label"></label>
+                <input asp-for="Senha" type="text" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="ConfirmacaoSenha" class="control-label"></label>
+                <input asp-for="ConfirmacaoSenha" type="text" class="form-control" />
+                <span asp-validation-for="ConfirmacaoSenha" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group text-center">
+            <a class="btn btn-primary" asp-action="Index">Voltar</a>
+            <input type="submit" value="Salvar" class="btn btn-success" />
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+}
+
+
+
+
+

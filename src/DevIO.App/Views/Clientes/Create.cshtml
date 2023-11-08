@@ -1,0 +1,258 @@
+﻿@using DevIO.Business.Models;
+@model DevIO.App.ViewModels.ClienteViewModel
+
+@{
+    ViewData["Title"] = "Adicionar Cliente";
+}
+<style>
+    label,h1 {
+        color: #1a5ec2;
+        font-weight: bold;
+    }
+</style>
+<h1 class="text-center">@ViewData["Title"]</h1>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
+
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create" id="cliente-form">
+           
+            <vc:Summary></vc:Summary>
+
+            <div class="form-group row">
+                <div class="col-md-5">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" placeholder="Nome completo ou Razão Social do Cliente" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Mail" class= "control-label"></label>
+                    <input asp-for="Mail" class="form-control" placeholder="E-mail do Cliente" />
+                    <span asp-validation-for="Mail" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Telefone" class="control-label"></label>
+                    <input type="hidden" asp-for="Telefone" class="form-control" />
+                    <input asp-for="TelefoneComFormatacao" class="form-control" placeholder="Telefone do Cliente" id="Telefone" onblur="formatarTelefone(this)" />
+                    <span asp-validation-for="TelefoneComFormatacao" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-md-5">
+                    <label></label>
+                    <div id="relogio" class="relogio"></div>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="TipoCliente" class="control-label"></label><br />
+                    <input type="radio" value="1" asp-for="TipoCliente" checked /> Pessoa Física<br />
+                    <input type="radio" value="2" asp-for="TipoCliente" /> Pessoa Jurídica
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Documento" class="control-label"></label>
+                    <input type="hidden" asp-for="Documento" class="form-control" />
+                    <input asp-for="DocumentoComFormatacao" class="form-control" placeholder="Insira o CPF ou o CNPJ do Cliente" id="Documento" onblur="formatarDocumento(this)" />
+                    <span asp-validation-for="DocumentoComFormatacao" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group row" id="PessoaFisicaInscricao-options">
+                <div class="col-md-5">
+                    <label asp-for="PessoaFisicaInscricao" class="control-label"></label><br />
+                    <input type="radio" value="1" asp-for="PessoaFisicaInscricao" checked /> Possui Inscrição Estadual<br />
+                    <input type="radio" value="2" asp-for="PessoaFisicaInscricao" checked /> Não Possui Inscrição Estadual<br />
+                </div>
+            </div>
+
+
+                <div class="form-group row"  id="InputInscricaoEstadual-options">
+                    <div class="col-md-4">
+                        <label asp-for="InscricaoEstadual" class="control-label"></label>
+                        <input type="hidden" asp-for="InscricaoEstadual" class="form-control" />
+                        <input asp-for="InscricaoEstadualComFormatacao" class="form-control" placeholder="Inscrição Estadual do Cliente" id="InscricaoEstadual" oninput="formatarInscricaoEstadual(this)" />
+                        <span asp-validation-for="InscricaoEstadualComFormatacao" class="text-danger"></span>
+                    </div>
+                </div>
+
+               <div class="form-group row" id="PessoaJuridica-options">
+                    <div class="col-md-3">
+                        <div class="form-group form-check">
+                            <label>Inscrição estadual:</label>
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Isento" /> @Html.DisplayNameFor(model => model.Isento)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+           
+            <br />
+            <div class="form-group row" id="PessoaFisica-options">
+                <div class="col-md-6">
+                    <label asp-for="Genero" class="control-label"></label>
+                    <select asp-for="Genero" asp-items="Html.GetEnumSelectList<Genero>()" class="form-control">
+                        <option value="">Selecione o gênero</option>
+                    </select>
+                    <span asp-validation-for="Genero" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="DataNascimento" class="control-label"></label>
+                    <input asp-for="DataNascimento" class="form-control" />
+                    <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row" >
+                <div class="col-md-3">
+                    <div class="form-group form-check">
+                       
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label asp-for="Senha" class="control-label"></label>
+                    <input asp-for="Senha" type="password" class="form-control" placeholder="Cadastre a senha de acesso do seu Cliente" />
+                    <span asp-validation-for="Senha" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ConfirmacaoSenha" class="control-label"></label>
+                    <input asp-for="ConfirmacaoSenha" type="password" class="form-control" placeholder="Confirme a senha" />
+                    <span asp-validation-for="ConfirmacaoSenha" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group text-center">
+                <a asp-action="Index" class="btn btn-primary">Voltar</a>
+                <input type="submit" value="Cadastrar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            formatarTelefone();
+            
+            formatarDocumento();
+            formatarInscricaoEstadual();
+           
+        });
+    </script> 
+    <script>
+        setInterval(atualizarRelogio, 1000);
+        atualizarRelogio();
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#PessoaFisica-options").hide();
+            $("#PessoaJuridica-options").hide();
+            $("#PessoaFisicaInscricao-options").hide();
+            $("#InputInscricaoEstadual-options").hide();
+
+            $("input[name='TipoCliente']").change(function () {
+                if ($(this).val() === "1") {
+                    $("#PessoaJuridica-options").hide();
+                    $("#PessoaFisica-options").show();
+                    $("#PessoaFisicaInscricao-options").show();
+                } else if ($(this).val() === "2") {
+                    $("#PessoaFisica-options").hide();
+                    $("#PessoaFisicaInscricao-options").hide();
+                    $("#PessoaJuridica-options").show();
+                    $("#InputInscricaoEstadual-options").show();
+                }
+            });
+
+            $("input[name='PessoaFisicaInscricao']").change(function () {
+                if ($(this).val() === "1") {
+                    $("#InputInscricaoEstadual-options").show();
+                } else if ($(this).val() === "2") {
+                    $("#InputInscricaoEstadual-options").hide();
+                }
+            });
+
+            $("#cliente-form").submit(function () {
+                var tipoCliente = $("input[name='TipoCliente']:checked").val();
+                var inscricaoEstadualFisica = $("input[name='PessoaFisicaInscricao']:checked").val();
+                var inscricaoEstadualJuridica = $("#Isento").prop("checked");
+
+                if (tipoCliente === "1") { 
+                    if (inscricaoEstadualFisica === "1") {
+                        var inscricaoEstadual = $("#InscricaoEstadual").val();
+                        if (!inscricaoEstadual) {
+                            $("#InscricaoEstadual").addClass("error-message");
+                            alert("Por favor, preencha a Inscrição Estadual.");
+                            return false; 
+                        } else {
+                            $("#InscricaoEstadual").removeClass("error-message");
+                        }
+                    } else {
+                        $("#InscricaoEstadual").removeClass("error-message");
+                    }
+                    var genero = $("#Genero").val();
+                    var dataNascimento = $("#DataNascimento").val();
+                    if (!genero || !dataNascimento) {
+                        $(".text-danger").addClass("error-message");
+                        alert("Por favor, preencha o gênero e a data de nascimento.");
+                        return false; 
+                    } else {
+                        $(".text-danger").removeClass("error-message");
+                    }
+                }
+
+                else if (tipoCliente === "2") {
+                    var isento = $("#Isento").prop("checked"); 
+                    var inscricaoestadual = $("#InscricaoEstadual").val();
+
+                    if (!isento && !inscricaoestadual) {
+                        $(".text-danger").addClass("error-message");
+                        alert("Por favor, selecione se a Pessoa Jurídica é isenta ou preencha a Inscrição Estadual.");
+                        return false;
+                    } else {
+                        $(".text-danger").removeClass("error-message"); 
+                    }
+
+                    if (isento) {
+                        $("#InputInscricaoEstadual-options").hide();    
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#InputInscricaoEstadual-options").hide();
+
+            $("input[name='Isento']").change(function () {
+                if ($(this).is(":checked")) {
+                    $("#InputInscricaoEstadual-options").hide();
+                } else {
+                    $("#InputInscricaoEstadual-options").show();
+                }
+            });
+        });
+    </script>
+   
+    <script>            
+        $(document).ready(function () {
+            $("input[name='TipoCliente']").prop('checked', false);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("input[name='PessoaFisicaInscricao']").prop('checked', false);
+        });
+    </script>
+}
