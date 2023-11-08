@@ -1,1 +1,1 @@
-# MinhaAppMvcCompleta 6.0
+# Projeto desenvolvido para um teste na empresa SmartHint
