@@ -1,5 +1,14 @@
 
 # <span class="titulo-azul">Projeto Desenvolvido para um Teste na Empresa SmartHint</span>
+
+### Ambiente de Desenvolvimento
+Este projeto foi desenvolvido utilizando o Visual Studio 2022 como ambiente de desenvolvimento principal. Durante o processo de desenvolvimento, o banco de dados foi mapeado e gerenciado diretamente dentro do Visual Studio.
+
+### Mapeamento do Banco de Dados
+O mapeamento do banco de dados foi realizado no Visual Studio, proporcionando uma integração direta entre o código da aplicação e a estrutura do banco de dados. Isso facilitou a manipulação e a atualização do esquema do banco de dados conforme necessário.
+
+### Ativação do XAMPP para Execução do Projeto Web
+Para possibilitar a execução e teste do projeto web, foi necessário ativar o XAMPP. O XAMPP forneceu o ambiente necessário, incluindo o servidor web Apache e o sistema de gerenciamento de banco de dados MySQL. A ativação do XAMPP permitiu visualizar e interagir com o banco de dados durante o desenvolvimento.
 ### Design do Banco de Dados do Projeto
 * Tabela Cliente:
 
