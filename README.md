@@ -19,7 +19,7 @@
 * ![Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://img.shields.io/badge/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation-6.0.3-blue)* ![MySql.Data](https://img.shields.io/badge/MySql.Data-8.2.0-blue)
 
 * ![Pomelo.EntityFrameworkCore.MySql](https://img.shields.io/badge/Pomelo.EntityFrameworkCore.MySql-6.0.0-blue)* ![X.PagedList.Mvc.Core](https://img.shields.io/badge/X.PagedList.Mvc.Core-8.4.7-blue)
-* 
+
 ### Linguagens ultilizada no Projeto:
 * ![C#](https://img.shields.io/badge/C%23-Programming%20Language-green)
 * ![HTML](https://img.shields.io/badge/HTML-Programming%20Language-orange)
@@ -30,6 +30,13 @@
 ![Visual Estudio 2022](https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white)
 ### Terminal:
 ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
+
+ ### Para estilos Está incorporando o framework:
+![Bootstrap](https://img.shields.io/badge/Bootstrap-Framework-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) 
+### Para Icone foi ultilizado:
+
+![Font Awesome](https://img.shields.io/badge/Font-Awesome-563D7C?style=for-the-badge&logo=Font&logoColor=white) 
+ 
 
 
 
